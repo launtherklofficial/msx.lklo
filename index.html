@@ -104,6 +104,170 @@ LauntherKL TV v1.0
 </footer>
 
 <script>
+
+let pages={
+
+iptv:`
+<h2>📡 Launther IPTV</h2>
+
+<input id="m3u" placeholder="https://example.com/playlist.m3u">
+
+<br><br>
+
+<button onclick="savePlaylist()">
+💾 Сохранить
+</button>
+
+<button onclick="loadPlaylist()">
+📥 Загрузить
+</button>
+
+<br><br>
+
+<div id="status"></div>
+
+<br>
+
+<div id="channels"></div>
+`,
+
+youtube:`
+<h2>▶ YouTube</h2>
+<p>Раздел находится в разработке.</p>
+`,
+
+lampa:`
+<h2>🎬 Lampa</h2>
+<p>Раздел находится в разработке.</p>
+`,
+
+store:`
+<h2>🛍 Магазин</h2>
+<p>Скоро здесь будут приложения.</p>
+`,
+
+fav:`
+<h2>⭐ Избранное</h2>
+<p>Пока пусто.</p>
+`,
+
+settings:`
+<h2>⚙ Настройки</h2>
+<p>Настройки появятся позже.</p>
+`
+
+};
+
+function openPage(page){
+
+document.body.innerHTML=`
+
+<header>📺 LauntherKL TV</header>
+
+<div style="padding:20px">
+
+<button onclick="location.reload()">
+⬅ Назад
+</button>
+
+<br><br>
+
+${pages[page]}
+
+</div>
+
+`;
+
+if(page=="iptv"){
+loadSaved();
+}
+
+}
+
+function loadSaved(){
+
+let url=localStorage.getItem("playlist");
+
+if(url){
+
+document.getElementById("m3u").value=url;
+
+}
+
+}
+
+function savePlaylist(){
+
+let url=document.getElementById("m3u").value;
+
+localStorage.setItem("playlist",url);
+
+document.getElementById("status").innerHTML=
+"✅ Плейлист сохранён";
+
+}
+
+async function loadPlaylist(){
+
+let url=document.getElementById("m3u").value;
+
+document.getElementById("status").innerHTML=
+"⏳ Загрузка...";
+
+try{
+
+let text=await fetch(url).then(r=>r.text());
+
+let list="";
+
+let lines=text.split("\n");
+
+for(let i=0;i<lines.length;i++){
+
+if(lines[i].startsWith("#EXTINF")){
+
+let name=lines[i].split(",")[1];
+
+let stream=lines[i+1];
+
+list+=`
+<div style="
+padding:12px;
+margin:8px;
+background:#222;
+border-radius:12px;
+cursor:pointer;
+"
+onclick="play('${stream}')">
+📺 ${name}
+</div>
+`;
+
+}
+
+}
+
+document.getElementById("channels").innerHTML=list;
+
+document.getElementById("status").innerHTML=
+"✅ Каналов найдено";
+
+}catch(e){
+
+document.getElementById("status").innerHTML=
+"❌ Ошибка загрузки";
+
+}
+
+}
+
+function play(url){
+
+alert("Здесь позже будет встроенный плеер:\n"+url);
+
+}
+
+</script>
 function openPage(page){
 alert("Раздел: " + page + " (будет добавлен в следующей части)");
 }
