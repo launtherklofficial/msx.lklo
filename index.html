@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LauntherKL TV</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#111;
+color:white;
+}
+
+header{
+height:70px;
+background:#1a1a1a;
+display:flex;
+align-items:center;
+padding:0 20px;
+font-size:28px;
+font-weight:bold;
+color:#00bfff;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.card{
+background:#222;
+height:150px;
+border-radius:20px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:22px;
+cursor:pointer;
+transition:.3s;
+}
+
+.card:hover{
+background:#00bfff;
+transform:scale(1.05);
+}
+
+footer{
+position:fixed;
+bottom:0;
+width:100%;
+background:#1a1a1a;
+padding:12px;
+text-align:center;
+color:#888;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+📺 LauntherKL TV
+</header>
+
+<div class="grid">
+
+<div class="card" onclick="openPage('iptv')">
+📡 IPTV
+</div>
+
+<div class="card" onclick="openPage('youtube')">
+▶ YouTube
+</div>
+
+<div class="card" onclick="openPage('lampa')">
+🎬 Lampa
+</div>
+
+<div class="card" onclick="openPage('store')">
+🛍 Магазин
+</div>
+
+<div class="card" onclick="openPage('fav')">
+⭐ Избранное
+</div>
+
+<div class="card" onclick="openPage('settings')">
+⚙ Настройки
+</div>
+
+</div>
+
+<footer>
+LauntherKL TV v1.0
+</footer>
+
+<script>
+function openPage(page){
+alert("Раздел: " + page + " (будет добавлен в следующей части)");
+}
+</script>
+
+</body>
+</html>
